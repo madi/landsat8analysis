@@ -17,15 +17,17 @@ import matplotlib.pyplot as plt
 
 #----------------------
 
-global landsat_path, graphs_path, csv_filename
+global landsat_path, graphs_path, csv_filename, csv_output
 
 #### Set paths here:
 # Directory in which the landsat are stored
-landsat_path = "/home/user/GIS/CanopyHealthMonitoring/Xylella/test_landsat8/landsat8" 
+landsat_path = "/home/user/Projects/test_landsat8/landsat8" 
 # Directory where you want to save the graphs
-graphs_path = "/home/user/GIS/CanopyHealthMonitoring/Xylella/test_landsat8/grafici" 
-# Name of CSV file, path included
-csv_filename = "/home/user/GIS/CanopyHealthMonitoring/Xylella/test_landsat8/utm_coord_with_id.csv"
+graphs_path = "/home/user/Projects/test_landsat8/graphs" 
+# Name for CSV input file, with cat, ordn, x, y of points, path included
+csv_filename = "/home/user/Projects/test_landsat8/utm_coord_with_id.csv"
+# Name for CSV output file, path included
+csv_output = "/home/user/Projects/test_landsat8/output.csv"
 
 L = 0.2 # coefficient used for calculating SAVI index
 
@@ -40,23 +42,6 @@ class Point(object):
         self.X = x
         self.Y = y
         self.TS = np.asarray(self)
-#        self.TS = np.asarray(TimeSeries)
-    
-#TODO:    
-#class TimeSeries(ndarray):
-#    '''This object registers for each point the following characteristics
-#    over time:
-#    * Column 0 : NIR
-#    * Column 1 : RED
-#    * Column 2 : GREEN
-#    * Column 3 : NDVI
-#    * Column 4 : SAVI '''
-#    def __init__(self, nir, red, green, ndvi, savi):
-#        self.NIR = nir
-#        self.RED = red
-#        self.GREEN = green
-#        self.NDVI = ndvi
-#        self.SAVI = savi
         
 #----------------------
 
@@ -166,8 +151,12 @@ def plotImage(cat, nir, red, green, ndvi, savi):
     #plt.show() # optional
     plt.savefig("point_%s_savi.jpeg" % cat)
     plt.close('all')     
-    
  
+#----------------------  
+ 
+def writeOutput(points):
+    pass
+
 #----------------------  
  
 if __name__ == '__main__':
